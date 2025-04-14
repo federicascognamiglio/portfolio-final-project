@@ -16,7 +16,8 @@ class CategoriesTableSeeder extends Seeder
     {
         foreach (CategoryEnum::cases() as $case) {
             Category::updateOrCreate(
-                ['name' => $case->value],
+                [ 'name' => $case->value ],
+                [ 'description' => $case->description() ]
             );
         }
     }
