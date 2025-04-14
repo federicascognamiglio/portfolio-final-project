@@ -1,0 +1,22 @@
+<?php
+
+namespace App\Models;
+
+use App\Models\Project;
+use App\Models\Type;
+use Illuminate\Database\Eloquent\Model;
+
+class Category extends Model
+{
+    protected $fillable = ['name', 'type_id'];
+    
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
+
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
+    }
+}
