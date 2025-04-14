@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
 
             $table->foreignId('project_id')->constrained()->onDelete('cascade');
-            $table->string('type')->nullable();
+            $table->string('type');
             $table->string('url');
             $table->string('description')->nullable();
             $table->unsignedInteger('position')->nullable();

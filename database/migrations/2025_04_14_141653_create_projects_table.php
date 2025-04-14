@@ -22,7 +22,6 @@ return new class extends Migration
             $table->longText('description')->nullable();
 
             $table->foreignId('category_id')->nullable()->constrained()->onDelete('set null');
-            $table->foreignId('type_id')->nullable()->constrained()->onDelete('set null');
 
             $table->string('status')->default('draft');
             $table->date('start_date')->nullable();
