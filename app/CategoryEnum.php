@@ -5,8 +5,19 @@ namespace App;
 enum CategoryEnum: string
 {
     case GRAPHIC_DESIGN = 'Graphic Design';
-    case THREE_D = '3D';
-    case MOTION_GRAPHICS = 'Motion Graphics';
     case SOCIAL_MEDIA = 'Social Media';
     case PHOTOGRAPHY = 'Photography';
+    case THREE_D = '3D';
+    case MOTION_GRAPHICS = 'Motion Graphics';
+
+    public function description(): string
+    {
+        return match ($this) {
+            self::GRAPHIC_DESIGN => 'Visual design, branding, and layout projects.',
+            self::SOCIAL_MEDIA => 'Content tailored for social media platforms.',
+            self::PHOTOGRAPHY => 'Photography-based content and editing.',
+            self::THREE_D => '3D modeling, rendering, and sculpting.',
+            self::MOTION_GRAPHICS => 'Animated visual effects and transitions.',
+        };
+    }
 }
