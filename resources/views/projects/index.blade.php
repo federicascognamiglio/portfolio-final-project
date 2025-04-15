@@ -9,7 +9,8 @@
 
     <!-- Status Filters -->
     <div class="mb-4 text-center">
-        <a href="{{ route('projects.index') }}" class="btn btn-sm btn-outline-primary {{ request('status') == null ? 'active' : '' }}">
+        <a href="{{ route('projects.index') }}"
+            class="btn btn-sm btn-outline-primary {{ request('status') == null ? 'active' : '' }}">
             All
         </a>
         <a href="{{ route('projects.index', ['status' => 'published']) }}"
@@ -36,6 +37,7 @@
                 <th scope="col text-uppercase">Start Date</th>
                 <th scope="col text-uppercase">End Date</th>
                 <th scope="col text-uppercase">Status</th>
+                <th scope="col text-uppercase">Details</th>
             </tr>
         </thead>
         <tbody>
@@ -52,7 +54,10 @@
                 <td>{{ $project->category['name'] }}</td>
                 <td>{{ $project->start_date }}</td>
                 <td>{{ $project->end_date }}</td>
-                <td>{{ $project->status }}</td>
+                <td class="text-capitalize">{{ $project->status }}</td>
+                <td>
+                    <a href="{{ route('projects.show', $project->slug) }}" class="btn btn-sm btn-primary">View</a>
+                </td>
             </tr>
             @endforeach
         </tbody>
