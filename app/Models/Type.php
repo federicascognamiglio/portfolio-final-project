@@ -2,16 +2,17 @@
 
 namespace App\Models;
 
+use App\TypeEnum;
 use Illuminate\Database\Eloquent\Model;
 
 class Type extends Model
 {
+    protected $casts = [
+        'name' => TypeEnum::class,
+    ];
+
     protected $fillable = ['name', 'category_id'];
 
-    protected $casts = [
-        'name' => CategoryEnum::class,
-    ];
-    
     public function categories()
     {
         return $this->hasMany(Category::class);
