@@ -5,7 +5,12 @@
 @section('content')
 <div class="container mt-5">
     <!-- Title -->
-    <h1 class="my-5 text-center text-uppercase">My Projects</h1>
+    <h1 class="mt-5 text-center text-uppercase">My Projects</h1>
+
+    <!-- Create Project Button -->
+    <div class="text-center mt-4 mb-5">
+        <a href="{{ route('projects.create') }}" class="btn btn-outline-secondary">Create New Project</a>
+    </div>
 
     <!-- Status Filters -->
     <div class="mb-4 text-center">
