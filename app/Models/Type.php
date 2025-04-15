@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Type extends Model
 {
     protected $fillable = ['name', 'category_id'];
+
+    protected $casts = [
+        'name' => CategoryEnum::class,
+    ];
     
     public function categories()
     {
