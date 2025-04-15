@@ -20,4 +20,15 @@ enum CategoryEnum: string
             self::MOTION_GRAPHICS => 'Animated visual effects and transitions.',
         };
     }
+
+    public function label(): string
+    {
+        return match ($this) {
+            self::GRAPHIC_DESIGN => 'Graphic Design',
+            self::SOCIAL_MEDIA => 'Social Media',
+            self::PHOTOGRAPHY => 'Photography',
+            self::THREE_D => '3D',
+            self::MOTION_GRAPHICS => 'Motion Graphics',
+        };
+    }
 }

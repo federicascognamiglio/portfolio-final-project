@@ -37,4 +37,25 @@ enum TypeEnum: string
             self::TWO_D_ANIMATION, self::INFOGRAPHICS, self::GIFS => 5,
         };
     }
+
+    public function label(): string
+    {
+        return match ($this) {
+            self::EDITORIAL => 'Editorial',
+            self::BRAND_IDENTITY => 'Brand Identity',
+            self::PACKAGING => 'Packaging',
+            self::INSTAGRAM => 'Instagram',
+            self::TIK_TOK => 'TikTok',
+            self::YOUTUBE => 'YouTube',
+            self::LINKEDIN => 'LinkedIn',
+            self::PRODUCT => 'Product',
+            self::ANALOGICAL => 'Analogical',
+            self::CONCEPTUAL => 'Conceptual',
+            self::THREE_D_MODELING => '3D Modeling',
+            self::THREE_D_ANIMATION => '3D Animation',
+            self::TWO_D_ANIMATION => '2D Animation',
+            self::INFOGRAPHICS => 'Infographics',
+            self::GIFS => 'GIFs',
+        };
+    }
 }
