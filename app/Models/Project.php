@@ -7,7 +7,7 @@ use App\Models\Type;
 use App\Models\Media;
 use App\Models\Tag;
 use App\Models\Tool;
-use App\Enums\ProjectStatus;
+use App\ProjectStatus;
 use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model

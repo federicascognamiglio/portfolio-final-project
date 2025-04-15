@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
 
-            $table->string('tile');
+            $table->string('title');
             $table->string('slug')->unique();
             $table->string('subtitle')->nullable();
             $table->string('cover_image')->nullable();
@@ -22,6 +22,7 @@ return new class extends Migration
             $table->longText('description')->nullable();
 
             $table->foreignId('category_id')->nullable()->constrained()->onDelete('set null');
+            $table->foreignId('type_id')->nullable()->constrained()->onDelete('set null');
 
             $table->string('status')->default('draft');
             $table->date('start_date')->nullable();
