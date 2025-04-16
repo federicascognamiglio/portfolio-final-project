@@ -3,7 +3,7 @@
 @section ('pageTitle', $project->title)
 
 @section ('content')
-<div class="container mt-5 d-flex flex-column align-items-center">
+<div class="container mt-5 mb-5 d-flex flex-column align-items-center">
     <h2 class="text-uppercase mt-5">{{ $project->title }}</h2>
     <p class="text-body-secondary">{{ $project->subtitle }}</p>
     <span class="badge text-bg-primary mb-4">{{ $project->category['name'] }} - {{ $project->type['name'] }}</span>
@@ -46,5 +46,10 @@
     </div>
     <p class="text-capitalize align-self-start mb-1 mt-3"><strong>description</strong></p>
     <p class="mb-5">{{ $project->description }}</p>
+    <div class="d-flex justify-content-center gap-4">
+        <a href="{{ route('projects.index') }}" class="btn btn-outline-primary">All Projects</a>
+        <a href="{{ route('projects.edit', $project->slug) }}" class="btn btn-outline-warning">Edit</a>
+        <a href="{{ route('projects.destroy', $project->id) }}" class="btn btn-outline-danger">Delete</a>
+    </div>
 </div>
 @endsection
