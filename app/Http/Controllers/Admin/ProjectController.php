@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Project;
+use App\Models\Tag;
+use App\Models\Tool;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -18,9 +21,9 @@ class ProjectController extends Controller
 
         // Fetch projects based on the status filter
         if ($status) {
-            $projects = Project::where('status', $status)->get();
+            $projects = Project::where('status', $status)->orderBy('created_at', 'desc')->get();
         } else {
-            $projects = Project::all();
+            $projects = Project::orderBy('created_at', 'desc')->get();
         }
         
         return view('projects.index', compact('projects', 'status'));
@@ -31,7 +34,12 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('projects.create');
+
+        // Fetch all tags and tools
+        $tags = Tag::all();
+        $tools = Tool::all();
+
+        return view('projects.create', compact('tags', 'tools'));
     }
 
     /**
@@ -39,7 +47,57 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        // Validate the request data
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'subtitle' => 'string|max:255',
+            'client' => 'string|max:255',
+            'description' => 'string',
+            'start_date' => 'date',
+            'end_date' => 'date',
+            'status' => 'required|in:draft,published,archived',
+            'category_id' => 'exists:categories,id',
+            'type_id' => 'exists:types,id',
+            'tags' => 'array',
+            'tools' => 'array',
+            'cover_image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+
+        // Handle the cover image upload
+        if ($request->hasFile('cover_image')) {
+            $imgUrl = Storage::putFile('projects', $validatedData['cover_image']);
+        }
+
+        // Slug generation
+        $slug = Project::generateUniqueSlug($validatedData['title']);
+
+        // Create a new project
+        $project = Project::create([
+            'title' => $validatedData['title'],
+            'slug' => $slug,
+            'subtitle' => $validatedData['subtitle'],
+            'cover_image' => $imgUrl ?? null,
+            'client' => $validatedData['client'],
+            'description' => $validatedData['description'],
+            'category_id' => $validatedData['category_id'],
+            'type_id' => $validatedData['type_id'],
+            'status' => $validatedData['status'],
+            'start_date' => $validatedData['start_date'],
+            'end_date' => $validatedData['end_date'],
+        ]);
+
+        // Attach tags and tools to the project
+        if (isset($validatedData['tags'])) {
+            $project->tags()->attach($validatedData['tags']);
+        }
+
+        if (isset($validatedData['tools'])) {
+            $project->tools()->attach($validatedData['tools']);
+        }
+
+        return redirect()->route('projects.index')->with('success', 'Project created successfully.');
     }
 
     /**
