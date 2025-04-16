@@ -34,7 +34,6 @@ class ProjectController extends Controller
      */
     public function create()
     {
-
         // Fetch all tags and tools
         $tags = Tag::all();
         $tools = Tool::all();
@@ -47,7 +46,6 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-
         // Validate the request data
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
@@ -63,7 +61,6 @@ class ProjectController extends Controller
             'tools' => 'array',
             'cover_image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-
 
         // Handle the cover image upload
         if ($request->hasFile('cover_image')) {
@@ -114,17 +111,81 @@ class ProjectController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $slug)
     {
-        //
+        // Find the project by slug
+        $project = Project::where('slug', $slug)->first();
+
+        // Fetch all tags and tools
+        $tags = Tag::all();
+        $tools = Tool::all();
+
+        return view('projects.edit', compact('project', 'tags', 'tools'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Project $project)
     {
-        //
+        // Validate the request data
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'subtitle' => 'string|max:255',
+            'client' => 'string|max:255',
+            'description' => 'string',
+            'start_date' => 'date',
+            'end_date' => 'date',
+            'status' => 'required|in:draft,published,archived',
+            'category_id' => 'exists:categories,id',
+            'type_id' => 'exists:types,id',
+            'tags' => 'array',
+            'tools' => 'array',
+            'cover_image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        // Handle the cover image upload
+        if ($request->hasFile('cover_image')) {
+            // Delete the old image if it exists
+            if ($project->cover_image) {
+                Storage::delete($project->cover_image);
+            }
+            // Store the new image
+            $imgUrl = Storage::putFile('projects', $validatedData['cover_image']);
+        }
+
+        // Check if the title has changed to generate a new slug
+        if ($project->title !== $validatedData['title']) {
+            $slug = Project::generateUniqueSlug($validatedData['title']);
+        } else {
+            $slug = $project->slug;
+        }
+
+        // Update the project
+        $project->update([
+            'title' => $validatedData['title'],
+            'slug' => $slug,
+            'subtitle' => $validatedData['subtitle'],
+            'cover_image' => $imgUrl ?? $project->cover_image,
+            'client' => $validatedData['client'],
+            'description' => $validatedData['description'],
+            'category_id' => $validatedData['category_id'],
+            'type_id' => $validatedData['type_id'],
+            'status' => $validatedData['status'],
+            'start_date' => $validatedData['start_date'],
+            'end_date' => $validatedData['end_date'],
+        ]);
+
+        // Sync tags and tools with the project
+        if (isset($validatedData['tags'])) {
+            $project->tags()->sync($validatedData['tags']);
+        }
+
+        if (isset($validatedData['tools'])) {
+            $project->tools()->sync($validatedData['tools']);
+        }
+
+        return redirect()->route('projects.show', $project->slug)->with('success', 'Project updated successfully.');
     }
 
     /**

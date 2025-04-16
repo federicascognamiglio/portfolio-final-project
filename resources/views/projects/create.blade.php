@@ -32,7 +32,7 @@
                 <div class="col-sm-6 col-md-4 mb-3">
                     <label for="description" class="form-label">Description</label>
                     <textarea row=3 class="form-control" id="description"
-                        name="description">This project is about...</textarea>
+                        name="description" placeholder="This project is about..."></textarea>
                 </div>
                 <!-- Start Date -->
                 <div class="col-sm-6 col-md-4 mb-3">
