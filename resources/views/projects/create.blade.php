@@ -72,18 +72,19 @@
                     </select>
                 </div>
                 <!-- Tags -->
-                <div class="col-12 mb-3">
-                    <label for="tags" class="form-label">Tags</label>
-                    <div class="form-control" id="tags">
+                <div class="col-6 mb-3">
+                    <label for="tags" class="form-labe mb-0 me-2">Tags</label>
+                    @include('partials.tagFormModal')
+                    <!-- <div class="form-control" id="tags">
                         @foreach ($tags as $tag)
                             <input type="checkbox" class="form-check-input me-1" id="tag_{{ $tag->id }}" name="tags[]"
                             value="{{ $tag->id }}">
                             <label for="tag_{{ $tag->id }}" class="form-label me-4">{{ $tag->name }}</label>
                         @endforeach
-                    </div>
+                    </div> -->
                 </div>
                 <!-- Tools -->
-                <div class="col-12 mb-3">
+                <div class="col-6 mb-3">
                     <label for="tools" class="form-label">Tools</label>
                     <div class="form-control" id="tools">
                         @foreach ($tools as $tool)
