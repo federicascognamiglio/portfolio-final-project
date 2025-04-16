@@ -1,4 +1,3 @@
-
 @extends('layouts.master')
 
 @section ('pageTitle', 'Create new Project')
@@ -12,35 +11,41 @@
         <form action="{{ route('projects.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
-            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
-                <div class="col mb-3">
+            <div class="row">
+                <!-- Title -->
+                <div class="col-sm-6 col-md-4 mb-3">
                     <label for="title" class="form-label">Title</label>
                     <input type="text" class="form-control" id="title" name="title" placeholder="New Project" required>
                 </div>
-                <div class="col mb-3">
+                <!-- Subtitle -->
+                <div class="col-sm-6 col-md-4 mb-3">
                     <label for="subtitle" class="form-label">Subtitle</label>
                     <input type="text" class="form-control" id="subtitle" name="subtitle"
                         placeholder="Subtitle for new project">
                 </div>
-                <div class="col mb-3">
+                <!-- Client -->
+                <div class="col-sm-6 col-md-4 mb-3">
                     <label for="client" class="form-label">Client</label>
                     <input type="text" class="form-control" id="client" name="client" placeholder="Company name">
                 </div>
-                <div class="col mb-3">
+                <!-- Description -->
+                <div class="col-sm-6 col-md-4 mb-3">
                     <label for="description" class="form-label">Description</label>
                     <textarea row=3 class="form-control" id="description"
                         name="description">This project is about...</textarea>
                 </div>
-                <div class="col mb-3">
+                <!-- Start Date -->
+                <div class="col-sm-6 col-md-4 mb-3">
                     <label for="start_date" class="form-label">Start Date</label>
                     <input type="date" class="form-control" id="start_date" name="start_date">
                 </div>
-                <div class="col mb-3">
+                <!-- End Date -->
+                <div class="col-sm-6 col-md-4 mb-3">
                     <label for="end_date" class="form-label">End Date</label>
                     <input type="date" class="form-control" id="end_date" name="end_date">
                 </div>
                 <!-- Status -->
-                <div class="col mb-3">
+                <div class="col-sm-6 col-md-4 mb-3">
                     <label for="status" class="form-label">Status</label>
                     <select name="status" class="form-select" id="status">
                         @foreach (App\ProjectStatus::cases() as $status)
@@ -49,34 +54,49 @@
                     </select>
                 </div>
                 <!-- Categories -->
-                <div class="col mb-3">
+                <div class="col-sm-6 col-md-4 mb-3">
                     <label for="category" class="form-label">Category</label>
                     <select name="category_id" class="form-select" id="category">
                         @foreach (App\CategoryEnum::cases() as $category)
-                        <option value="{{ $category->value }}">{{ ($category->label()) }}</option>
+                        <option value="{{ $category->categoryId() }}">{{ ($category->label()) }}</option>
                         @endforeach
                     </select>
                 </div>
                 <!-- Types -->
-                <div class="col mb-3">
+                <div class="col-sm-6 col-md-4 mb-3">
                     <label for="type" class="form-label">Type</label>
                     <select name="type_id" class="form-select" id="type">
                         @foreach (App\TypeEnum::cases() as $type)
-                        <option value="{{ $type->value }}">{{ ($type->label()) }}</option>
+                        <option value="{{ $type->typeId() }}">{{ ($type->label()) }}</option>
                         @endforeach
                     </select>
                 </div>
                 <!-- Tags -->
+                <div class="col-12 mb-3">
+                    <label for="tags" class="form-label">Tags</label>
+                    <div class="form-control" id="tags">
+                        @foreach ($tags as $tag)
+                            <input type="checkbox" class="form-check-input me-1" id="tag_{{ $tag->id }}" name="tags[]"
+                            value="{{ $tag->id }}">
+                            <label for="tag_{{ $tag->id }}" class="form-label me-4">{{ $tag->name }}</label>
+                        @endforeach
+                    </div>
+                </div>
                 <!-- Tools -->
+                <div class="col-12 mb-3">
+                    <label for="tools" class="form-label">Tools</label>
+                    <div class="form-control" id="tools">
+                        @foreach ($tools as $tool)
+                            <input type="checkbox" class="form-check-input me-1" id="tool_{{ $tool->id }}" name="tools[]"
+                            value="{{ $tool->id }}">
+                            <label for="tool_{{ $tool->id }}" class="form-label me-4">{{ $tool->name }}</label>
+                        @endforeach
+                    </div>
+                </div>
                 <!-- Cover Image -->
                 <div class="col mb-3">
                     <label for="cover_image" class="form-label">Cover Image</label>
                     <input type="file" class="form-control" id="cover_image" name="cover_image">
-                </div>
-                <!-- Media -->
-                <div class="col mb-3">
-                    <label for="gallery" class="form-label">Gallery</label>
-                    <input type="file" class="form-control" id="gallery" name="media[]" multiple>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary mt-3">Create Project</button>
