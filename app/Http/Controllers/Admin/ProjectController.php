@@ -191,8 +191,20 @@ class ProjectController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Project $project)
     {
-        //
+        // Delete the project cover image if it exists
+        if ($project->cover_image) {
+            Storage::delete($project->cover_image);
+        }
+
+        // Detach tags and tools from the project
+        $project->tags()->detach();
+        $project->tools()->detach();
+
+        // Delete the project
+        $project->delete();
+
+        return redirect()->route('projects.index')->with('success', 'Project deleted successfully.');
     }
 }
