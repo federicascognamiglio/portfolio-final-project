@@ -8,6 +8,7 @@ use App\Models\Media;
 use App\Models\Tag;
 use App\Models\Tool;
 use App\ProjectStatus;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
@@ -53,5 +54,19 @@ class Project extends Model
     public function tools()
     {
         return $this->belongsToMany(Tool::class, 'project_tool');
+    }
+
+    public static function generateUniqueSlug($title) 
+    {
+        $slug = Str::slug($title);
+        $originalSlug = $slug;
+        $i = 1;
+
+        while (self::where('slug', $slug)->exists()) {
+            $slug = $originalSlug . '-' . $i;
+            $i++;
+        }
+
+        return $slug;
     }
 }
