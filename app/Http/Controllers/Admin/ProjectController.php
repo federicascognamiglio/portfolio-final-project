@@ -49,17 +49,17 @@ class ProjectController extends Controller
         // Validate the request data
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
-            'subtitle' => 'string|max:255',
-            'client' => 'string|max:255',
-            'description' => 'string',
-            'start_date' => 'date',
-            'end_date' => 'date',
+            'subtitle' => 'nullable|string|max:255',
+            'client' => 'nullable|string|max:255',
+            'description' => 'nullable|string',
+            'start_date' => 'nullable|date',
+            'end_date' => 'nullable|date',
             'status' => 'required|in:draft,published,archived',
-            'category_id' => 'exists:categories,id',
-            'type_id' => 'exists:types,id',
-            'tags' => 'array',
-            'tools' => 'array',
-            'cover_image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'category_id' => 'nullable|exists:categories,id',
+            'type_id' => 'nullable|exists:types,id',
+            'tags' => 'nullable|array',
+            'tools' => 'nullable|array',
+            'cover_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         // Handle the cover image upload
@@ -131,17 +131,17 @@ class ProjectController extends Controller
         // Validate the request data
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
-            'subtitle' => 'string|max:255',
-            'client' => 'string|max:255',
-            'description' => 'string',
-            'start_date' => 'date',
-            'end_date' => 'date',
+            'subtitle' => 'nullable|string|max:255',
+            'client' => 'nullable|string|max:255',
+            'description' => 'nullable|string',
+            'start_date' => 'nullable|date',
+            'end_date' => 'nullable|date',
             'status' => 'required|in:draft,published,archived',
-            'category_id' => 'exists:categories,id',
-            'type_id' => 'exists:types,id',
-            'tags' => 'array',
-            'tools' => 'array',
-            'cover_image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'category_id' => 'nullable|exists:categories,id',
+            'type_id' => 'nullable|exists:types,id',
+            'tags' => 'nullable|array',
+            'tools' => 'nullable|array',
+            'cover_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         // Handle the cover image upload
@@ -179,10 +179,14 @@ class ProjectController extends Controller
         // Sync tags and tools with the project
         if (isset($validatedData['tags'])) {
             $project->tags()->sync($validatedData['tags']);
+        } else {
+            $project->tags()->detach();
         }
 
         if (isset($validatedData['tools'])) {
             $project->tools()->sync($validatedData['tools']);
+        } else {
+            $project->tools()->detach();
         }
 
         return redirect()->route('projects.show', $project->slug)->with('success', 'Project updated successfully.');
