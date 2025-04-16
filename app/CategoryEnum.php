@@ -31,4 +31,15 @@ enum CategoryEnum: string
             self::MOTION_GRAPHICS => 'Motion Graphics',
         };
     }
+
+    public function categoryId(): int
+    {
+        return match ($this) {
+            self::GRAPHIC_DESIGN => 1,
+            self::SOCIAL_MEDIA => 2,
+            self::PHOTOGRAPHY => 3,
+            self::THREE_D => 4,
+            self::MOTION_GRAPHICS => 5,
+        };
+    }
 }

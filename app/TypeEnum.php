@@ -58,4 +58,25 @@ enum TypeEnum: string
             self::GIFS => 'GIFs',
         };
     }
+
+    public function typeId(): int
+    {
+        return match ($this) {
+            self::EDITORIAL => 1,
+            self::BRAND_IDENTITY => 2,
+            self::PACKAGING => 3,
+            self::INSTAGRAM => 4,
+            self::TIK_TOK => 5,
+            self::YOUTUBE => 6,
+            self::LINKEDIN => 7,
+            self::PRODUCT => 8,
+            self::ANALOGICAL => 9,
+            self::CONCEPTUAL => 10,
+            self::THREE_D_MODELING => 11,
+            self::THREE_D_ANIMATION => 12,
+            self::TWO_D_ANIMATION => 13,
+            self::INFOGRAPHICS => 14,
+            self::GIFS => 15,
+        };
+    }
 }
