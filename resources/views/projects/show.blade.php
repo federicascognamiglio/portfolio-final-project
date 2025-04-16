@@ -7,15 +7,34 @@
     <h2 class="text-uppercase mt-5">{{ $project->title }}</h2>
     <p class="text-body-secondary">{{ $project->subtitle }}</p>
     <span class="badge text-bg-primary mb-4">{{ $project->category['name'] }} - {{ $project->type['name'] }}</span>
-    <img src="{{ $project->cover_image ? $project->cover_image : 'https://placehold.co/600x400' }}"
-        alt="{{ $project->title }}" class="mb-3 w-100">
+    @if ($project->cover_image)
+    <img src="{{ asset('storage/' . $project->cover_image) }}"
+        alt="{{ $project->title }}" class="mb-5 w-25">
+    @endif
     <div class="d-flex justify-content-between w-100">
         <div>
             <p class="text-muted text-capitalize">Status: {{ $project->status }}</p>
             <p class="text-muted">Client: {{ $project->client ? $project->client : 'Personal project'}}
             </p>
-            <p>Tags:</p>
-            <p>Tools:</p>
+            @if (count($project->tags) > 0)
+            <div class="d-flex align-items-center mb-2">
+                <p class="mb-0 me-2">Tags:</p>
+                @foreach ($project->tags as $tag)
+                <span class="badge rounded-pill me-2"
+                    style="background-color: {{ $tag->color }} ">{{ $tag->name }}</span>
+                @endforeach
+                @endif
+            </div>
+            @if (count($project->tools) > 0)
+            <div class="d-flex align-items-center mb-2">
+                <p class="mb-0 me-2">Tools:</p>
+                @foreach ($project->tools as $tool)
+                <div class="d-flex">
+                    <span class="badge rounded-pill text-bg-dark me-2">{{ $tool->name }}</span>
+                </div>
+                @endforeach
+            </div>
+            @endif
         </div>
         @if ($project->start_date)
         <div>
