@@ -31,8 +31,8 @@
                 <!-- Description -->
                 <div class="col-sm-6 col-md-4 mb-3">
                     <label for="description" class="form-label">Description</label>
-                    <textarea row=3 class="form-control" id="description"
-                        name="description" placeholder="This project is about..."></textarea>
+                    <textarea row=3 class="form-control" id="description" name="description"
+                        placeholder="This project is about..."></textarea>
                 </div>
                 <!-- Start Date -->
                 <div class="col-sm-6 col-md-4 mb-3">
@@ -73,26 +73,20 @@
                 </div>
                 <!-- Tags -->
                 <div class="col-6 mb-3">
-                    <label for="tags" class="form-labe mb-0 me-2">Tags</label>
-                    @include('partials.tagFormModal')
-                    <!-- <div class="form-control" id="tags">
-                        @foreach ($tags as $tag)
-                            <input type="checkbox" class="form-check-input me-1" id="tag_{{ $tag->id }}" name="tags[]"
-                            value="{{ $tag->id }}">
-                            <label for="tag_{{ $tag->id }}" class="form-label me-4">{{ $tag->name }}</label>
-                        @endforeach
-                    </div> -->
+                    <div class="d-flex align-items-center mb-2">
+                        <p class="form-labe mb-0 me-2">Tags:</p>
+                        <div id="selected-tags"></div>
+                    </div>
+                    <!-- Pulsante per aprire il modale -->
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#tagModal"
+                        class="btn btn-sm btn-primary">
+                        Add Tags
+                    </button>
                 </div>
                 <!-- Tools -->
                 <div class="col-6 mb-3">
-                    <label for="tools" class="form-label">Tools</label>
-                    <div class="form-control" id="tools">
-                        @foreach ($tools as $tool)
-                            <input type="checkbox" class="form-check-input me-1" id="tool_{{ $tool->id }}" name="tools[]"
-                            value="{{ $tool->id }}">
-                            <label for="tool_{{ $tool->id }}" class="form-label me-4">{{ $tool->name }}</label>
-                        @endforeach
-                    </div>
+
+
                 </div>
                 <!-- Cover Image -->
                 <div class="col mb-3">
@@ -104,4 +98,11 @@
         </form>
     </div>
 </div>
+@endsection
+
+<!-- Modal handle tags -->
+@include('partials.tagFormModal')
+
+@section('scripts')
+@vite('resources/js/tagForm.js')
 @endsection
