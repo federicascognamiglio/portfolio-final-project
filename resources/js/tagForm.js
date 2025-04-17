@@ -18,11 +18,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const editTagIdInput = document.getElementById('edit-tag-id');
     const editTagNameInput = document.getElementById('edit-tag-name');
     const editTagColorInput = document.getElementById('edit-tag-color');
-    const cancelEditBtn = document.getElementById('cancel-edit-btn');
+    const cancelTagEditBtn = document.getElementById('cancel-tag-edit-btn');
 
     // Delete confirmation buttons
-    const confirmDeleteBtn = document.getElementById('confirm-delete-btn');
-    const cancelDeleteBtn = document.getElementById('cancel-delete-btn');
+    const confirmTagDeleteBtn = document.getElementById('confirm-tag-delete-btn');
+    const cancelTagDeleteBtn = document.getElementById('cancel-tag-delete-btn');
 
     let tagIdToDelete = null;
 
@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const checkedTags = document.querySelectorAll('input[name="tags[]"]:checked');
             let html = '';
             checkedTags.forEach(tag => {
-                const tagId = tag.getAttribute('id'); // es: "tag12"
+                const tagId = tag.getAttribute('id');
                 const label = document.querySelector(`label[for="${tagId}"]`);
                 const tagName = label ? label.textContent.trim() : 'undefined';
                 html += `<span class="badge bg-secondary me-1">${tagName}</span>`;
@@ -144,13 +144,13 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Cancel edits
-    cancelEditBtn.addEventListener('click', function () {
+    cancelTagEditBtn.addEventListener('click', function () {
         tagEditMode.classList.add('d-none');
         tagViewMode.classList.remove('d-none');
     });
 
     // Confirm delete
-    confirmDeleteBtn.addEventListener('click', function () {
+    confirmTagDeleteBtn.addEventListener('click', function () {
         if (!tagIdToDelete) return;
 
         axios.delete(`/tags/${tagIdToDelete}`)
@@ -169,7 +169,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Cancel delete
-    cancelDeleteBtn.addEventListener('click', function () {
+    cancelTagDeleteBtn.addEventListener('click', function () {
         tagDeleteMode.classList.add('d-none');
         tagViewMode.classList.remove('d-none');
         tagIdToDelete = null;

@@ -35,7 +35,7 @@
                     <div class="row">
                         <div class="col-6">
                             <label for="new-tag-name" class="form-label">Tag name</label>
-                            <input type="text" name="name" id="new-tag-name" class="form-control mb-2">
+                            <input type="text" name="name" id="new-tag-name" class="form-control mb-2" required>
                         </div>
                         <div class="col-3">
                             <label for="new-tag-color" class="form-label">Tag color</label>
@@ -46,7 +46,7 @@
                     <div class="modal-footer mt-3">
                         <div class="d-flex justify-content-end">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                                aria-label="Chiudi">Save</button>
+                                aria-label="Chiudi">Close</button>
                         </div>
                     </div>
                 </div>
@@ -74,7 +74,7 @@
 
                     </div>
                     <div class="modal-footer d-flex justify-content-end">
-                        <button type="button" class="btn btn-secondary me-2" id="cancel-edit-btn">Cancel</button>
+                        <button type="button" class="btn btn-secondary me-2" id="cancel-tag-edit-btn">Cancel</button>
                         <button type="submit" class="btn btn-primary">Save</button>
                     </div>
                 </form>
@@ -86,11 +86,11 @@
                     <h5 class="modal-title" id="tagModalLabel">Delete Tag</h5>
                 </div>
                 <div class="modal-body">
-                    <p>Are you sure you want to delete the tag?</p>
+                    <p>Are you sure you want to delete this tag?</p>
                 </div>
                 <div class="modal-footer d-flex justify-content-end mt-4">
-                    <button type="button" id="cancel-delete-btn" class="btn btn-secondary w-45 me-2">Cancel</button>
-                    <button type="button" id="confirm-delete-btn" class="btn btn-danger w-45">Delete</button>
+                    <button type="button" id="cancel-tag-delete-btn" class="btn btn-secondary w-45 me-2">Cancel</button>
+                    <button type="button" id="confirm-tag-delete-btn" class="btn btn-danger w-45">Delete</button>
                 </div>
             </div>
         </div>
