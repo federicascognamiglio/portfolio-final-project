@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\TagController;
+use App\Http\Controllers\Admin\ToolController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,8 +20,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// Projects Routes
 Route::resource('/projects', ProjectController::class)->middleware(['auth', 'verified']);
 
+// Tags Routes
 Route::resource('/tags', TagController::class)->middleware(['auth', 'verified']);
+
+// Tool Routes
+Route::resource('/tools', ToolController::class)->middleware(['auth', 'verified']);
 
 require __DIR__.'/auth.php';
