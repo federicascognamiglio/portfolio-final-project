@@ -77,16 +77,23 @@
                         <p class="form-labe mb-0 me-2">Tags:</p>
                         <div id="selected-tags"></div>
                     </div>
-                    <!-- Pulsante per aprire il modale -->
+                    <!-- Tag modal button -->
                     <button type="button" data-bs-toggle="modal" data-bs-target="#tagModal"
                         class="btn btn-sm btn-primary">
-                        Add Tags
+                        Select Tags
                     </button>
                 </div>
                 <!-- Tools -->
                 <div class="col-6 mb-3">
-
-
+                    <div class="d-flex align-items-center mb-2">
+                        <p class="form-labe mb-0 me-2">Tools:</p>
+                        <div id="selected-tools"></div>
+                    </div>
+                    <!-- Tool modal button -->
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#toolModal"
+                        class="btn btn-sm btn-primary">
+                        Select Tools
+                    </button>
                 </div>
                 <!-- Cover Image -->
                 <div class="col mb-3">
@@ -102,7 +109,12 @@
 
 <!-- Modal handle tags -->
 @include('partials.tagFormModal')
+<!-- Modal handle tools -->
+@include('partials.toolFormModal')
 
 @section('scripts')
+<!-- Tag handle Script -->
 @vite('resources/js/tagForm.js')
+<!-- Tool handle Script -->
+@vite('resources/js/toolForm.js')
 @endsection
