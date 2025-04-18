@@ -174,8 +174,4 @@ document.addEventListener('DOMContentLoaded', function () {
         tagViewMode.classList.remove('d-none');
         tagIdToDelete = null;
     });
-
-    // Initial rendering 
-    const event = new Event('hidden.bs.modal');
-    tagModal.dispatchEvent(event);
 });

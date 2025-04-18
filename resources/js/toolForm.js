@@ -185,8 +185,4 @@ document.addEventListener('DOMContentLoaded', function () {
         toolViewMode.classList.remove('d-none');
         toolIdToDelete = null;
     });
-
-    // Initial rendering 
-    const event = new Event('hidden.bs.modal');
-    toolModal.dispatchEvent(event);
 });

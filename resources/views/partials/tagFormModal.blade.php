@@ -14,7 +14,7 @@
                         @foreach($tags as $tag)
                         <div class="d-flex align-items-center mb-1" data-tag-id="{{ $tag->id }}">
                             <input type="checkbox" name="tags[]" value="{{ $tag->id }}" id="tag{{ $tag->id }}"
-                                class="me-2">
+                                class="me-2" {{ isset($selectedTags) && in_array($tag->id, $selectedTags) ? 'checked' : '' }}>
                             <label for="tag{{ $tag->id }}" class="form-label me-2 mb-0">{{ $tag->name }}</label>
                             <button type="button" class="btn btn-sm btn-outline-warning me-1 btn-edit-tag"
                                 data-id="{{ $tag->id }}" data-name="{{ $tag->name }}"

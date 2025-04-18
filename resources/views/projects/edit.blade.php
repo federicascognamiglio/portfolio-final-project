@@ -3,7 +3,7 @@
 @section ('pageTitle', 'Create new Project')
 
 @section('content')
-<div class="container mt-5">
+<div class="container my-5">
     <h1 class="my-5 text-uppercase text-center">Edit: {{ $project->title }}</h1>
 
     <!-- Form -->
@@ -81,26 +81,40 @@
                     </select>
                 </div>
                 <!-- Tags -->
-                <div class="col-12 mb-3">
-                    <label for="tags" class="form-label">Tags</label>
-                    <div class="form-control" id="tags">
-                        @foreach ($tags as $tag)
-                        <input type="checkbox" class="form-check-input me-1" id="tag_{{ $tag->id }}" name="tags[]"
-                            value="{{ $tag->id }}" {{ $project->tags->contains($tag->id) ? 'checked' : '' }}>
-                        <label for="tag_{{ $tag->id }}" class="form-label me-4">{{ $tag->name }}</label>
-                        @endforeach
+                <div class="col-6 mb-3">
+                    <div class="d-flex align-items-center mb-2">
+                        <p class="form-labe mb-0 me-2">Tags:</p>
+                        <div id="selected-tags">
+                            @forelse($project->tags as $tag)
+                            <span class="badge bg-secondary me-1">{{ $tag->name }}</span>
+                            @empty
+                            <span class="text-muted">No tags selected</span>
+                            @endforelse
+                        </div>
                     </div>
+                    <!-- Tag modal button -->
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#tagModal"
+                        class="btn btn-sm btn-primary">
+                        Select Tags
+                    </button>
                 </div>
                 <!-- Tools -->
-                <div class="col-12 mb-3">
-                    <label for="tools" class="form-label">Tools</label>
-                    <div class="form-control" id="tools">
-                        @foreach ($tools as $tool)
-                        <input type="checkbox" class="form-check-input me-1" id="tool_{{ $tool->id }}" name="tools[]"
-                            value="{{ $tool->id }}" {{ $project->tools->contains($tool->id) ? 'checked' : '' }}>
-                        <label for="tool_{{ $tool->id }}" class="form-label me-4">{{ $tool->name }}</label>
-                        @endforeach
+                <div class="col-6 mb-3">
+                    <div class="d-flex align-items-center mb-2">
+                        <p class="form-labe mb-0 me-2">Tools:</p>
+                        <div id="selected-tools">
+                            @forelse($project->tools as $tool)
+                            <span class="badge bg-secondary me-1">{{ $tool->name }}</span>
+                            @empty
+                            <span class="text-muted">No tools selected</span>
+                            @endforelse
+                        </div>
                     </div>
+                    <!-- Tool modal button -->
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#toolModal"
+                        class="btn btn-sm btn-primary">
+                        Select Tools
+                    </button>
                 </div>
                 <!-- Cover Image -->
                 <div class="col-12 mb-3 form-control">
@@ -108,7 +122,8 @@
                         <label for="cover_image" class="form-label mb-0">Cover Image</label>
                         <input type="file" class="form-control w-75" id="cover_image" name="cover_image">
                         @if ($project->cover_image)
-                        <img src="{{ asset('storage/' . $project->cover_image) }}" alt="{{ $project->title }}" style="width:40px">
+                        <img src="{{ asset('storage/' . $project->cover_image) }}" alt="{{ $project->title }}"
+                            style="width:40px">
                         @endif
                     </div>
                 </div>
@@ -117,4 +132,16 @@
         </form>
     </div>
 </div>
+@endsection
+
+<!-- Modal handle tags -->
+@include('partials.tagFormModal')
+<!-- Modal handle tools -->
+@include('partials.toolFormModal')
+
+@section('scripts')
+<!-- Tag handle Script -->
+@vite('resources/js/tagForm.js')
+<!-- Tool handle Script -->
+@vite('resources/js/toolForm.js')
 @endsection

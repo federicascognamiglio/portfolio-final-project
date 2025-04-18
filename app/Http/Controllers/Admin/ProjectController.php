@@ -114,13 +114,17 @@ class ProjectController extends Controller
     public function edit(string $slug)
     {
         // Find the project by slug
-        $project = Project::where('slug', $slug)->first();
+        $project = Project::with('tags', 'tools')->where('slug', $slug)->first();
 
         // Fetch all tags and tools
         $tags = Tag::all();
         $tools = Tool::all();
 
-        return view('projects.edit', compact('project', 'tags', 'tools'));
+        // Get the selected tags and tools for the project
+        $selectedTags = $project->tags()->pluck('tags.id')->toArray();
+        $selectedTools = $project->tools()->pluck('tools.id')->toArray();
+
+        return view('projects.edit', compact('project', 'tags', 'tools', 'selectedTags', 'selectedTools'));
     }
 
     /**
