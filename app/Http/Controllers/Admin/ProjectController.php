@@ -38,7 +38,10 @@ class ProjectController extends Controller
         $tags = Tag::all();
         $tools = Tool::all();
 
-        return view('projects.create', compact('tags', 'tools'));
+        // Media
+        $media = [];
+
+        return view('projects.create', compact('tags', 'tools', 'media'));
     }
 
     /**
@@ -102,8 +105,8 @@ class ProjectController extends Controller
      */
     public function show(string $slug)
     {
-        // Find the project by slug
-        $project = Project::where('slug', $slug)->first();
+        // Find the project by slug and eager load media
+        $project = Project::with('media')->where('slug', $slug)->first();
 
         return view('projects.show', compact('project'));
     }
