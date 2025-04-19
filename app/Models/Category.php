@@ -20,8 +20,8 @@ class Category extends Model
         return $this->hasMany(Project::class);
     }
 
-    public function type()
+    public function types()
     {
-        return $this->belongsTo(Type::class);
+        return $this->hasMany(Type::class);
     }
 }
