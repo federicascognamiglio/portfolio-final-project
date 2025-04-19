@@ -45,6 +45,16 @@
     </div>
     <p class="text-capitalize align-self-start mb-1 mt-3"><strong>description</strong></p>
     <p class="mb-5">{{ $project->description }}</p>
+
+    <!-- Media -->
+    <!-- Project Media -->
+    <div class="col mb-3">
+        <!-- Media modal button -->
+        <button type="button" data-bs-toggle="modal" data-bs-target="#mediaModal" class="btn btn-sm btn-primary">
+            Add Media
+        </button>
+    </div>
+
     <div class="d-flex justify-content-center gap-4">
         <a href="{{ route('projects.index') }}" class="btn btn-outline-primary">All Projects</a>
         <a href="{{ route('projects.edit', $project->slug) }}" class="btn btn-outline-warning">Edit</a>
@@ -63,7 +73,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    The project "{{ $project->title }}" will be <strong>permanently deleted</strong>. Are you sure you want to proceed?
+                    The project "{{ $project->title }}" will be <strong>permanently deleted</strong>. Are you sure you
+                    want to proceed?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -77,4 +88,12 @@
         </div>
     </div>
 </div>
+@endsection
+
+<!-- Modal handle media -->
+@include('partials.mediaFormModal')
+
+@section('scripts')
+<!-- Media handle Script -->
+@vite('resources/js/mediaForm.js')
 @endsection
