@@ -85,6 +85,18 @@ document.addEventListener('DOMContentLoaded', function () {
             toolEditMode.classList.add('d-none');
             toolDeleteMode.classList.add('d-none');
             toolViewMode.classList.remove('d-none');
+
+            // Add selected tools to form
+            const hiddenToolsWrapper = document.getElementById('hidden-tools-wrapper');
+            hiddenToolsWrapper.innerHTML = ''; 
+
+            checkedTools.forEach(tool => {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'tools[]';
+                input.value = tool.value;
+                hiddenToolsWrapper.appendChild(input);
+            });
         });
     }
 

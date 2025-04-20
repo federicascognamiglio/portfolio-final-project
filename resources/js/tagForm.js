@@ -79,6 +79,18 @@ document.addEventListener('DOMContentLoaded', function () {
             tagEditMode.classList.add('d-none');
             tagDeleteMode.classList.add('d-none');
             tagViewMode.classList.remove('d-none');
+
+            // Add selected tags to form
+            const hiddenTagsWrapper = document.getElementById('hidden-tags-wrapper');
+            hiddenTagsWrapper.innerHTML = '';
+
+            checkedTags.forEach(tag => {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'tags[]';
+                input.value = tag.value;
+                hiddenTagsWrapper.appendChild(input);
+            });
         });
     }
 
