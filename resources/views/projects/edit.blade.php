@@ -84,6 +84,7 @@
                 <div class="col-6 mb-3">
                     <div class="d-flex align-items-center mb-2">
                         <p class="form-labe mb-0 me-2">Tags:</p>
+                        <div id="hidden-tags-wrapper"></div>
                         <div id="selected-tags">
                             @forelse($project->tags as $tag)
                             <span class="badge bg-secondary me-1">{{ $tag->name }}</span>
@@ -102,6 +103,7 @@
                 <div class="col-6 mb-3">
                     <div class="d-flex align-items-center mb-2">
                         <p class="form-labe mb-0 me-2">Tools:</p>
+                        <div id="hidden-tools-wrapper"></div>
                         <div id="selected-tools">
                             @forelse($project->tools as $tool)
                             <span class="badge bg-secondary me-1">{{ $tool->name }}</span>
