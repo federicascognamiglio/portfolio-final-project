@@ -10,12 +10,19 @@ class ProjectController extends Controller
 {
     public function index()
     {
-        // Get all projects
-        $projects = Project::with('category', 'type')->get();
+        $query = Project::with('category', 'type');
+
+        if ($request->has('category_id')) {
+            $query->where('category_id', $request->category_id);
+        }
+
+        if ($request->has('type_id')) {
+            $query->where('type_id', $request->type_id);
+        }
 
         return response()->json([
             'success' => true,
-            'data' => $projects,
+            'data' => $query->get(),
         ]);
     }
 
@@ -31,4 +38,3 @@ class ProjectController extends Controller
         ]);
     }
 }
-
