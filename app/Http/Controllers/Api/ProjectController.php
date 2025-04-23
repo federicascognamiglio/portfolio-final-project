@@ -12,12 +12,12 @@ class ProjectController extends Controller
     {
         $query = Project::with('category', 'type');
 
-        if ($request->has('category_id')) {
-            $query->where('category_id', $request->category_id);
+        if ($request->has('category_name')) {
+            $query->where('category_name', $request->category_name);
         }
 
-        if ($request->has('type_id')) {
-            $query->where('type_id', $request->type_id);
+        if ($request->has('type_name')) {
+            $query->where('type_name', $request->type_name);
         }
 
         return response()->json([
