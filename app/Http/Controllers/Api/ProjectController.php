@@ -8,16 +8,22 @@ use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $query = Project::with('category', 'type');
+        $query = Project::with('category', 'type')->where('status' , 'published');
 
+        // Filtro per nome categoria
         if ($request->has('category_name')) {
-            $query->where('category_name', $request->category_name);
+            $query->whereHas('category', function ($q) use ($request) {
+                $q->where('name', $request->category_name);
+            });
         }
 
+        // Filtro per nome tipo
         if ($request->has('type_name')) {
-            $query->where('type_name', $request->type_name);
+            $query->whereHas('type', function ($q) use ($request) {
+                $q->where('name', $request->type_name);
+            });
         }
 
         return response()->json([
