@@ -15,7 +15,8 @@
                     <div id="media-grid" class="d-flex flex-wrap gap-3">
 
                         @foreach ($project->media as $item)
-                        <div class="position-relative media-thumbnail media-card" style="width: 100px; height: 100px;" data-id="{{ $item->id }}">
+                        <div class="position-relative media-thumbnail media-card" style="width: 100px; height: 100px;"
+                            data-id="{{ $item->id }}">
 
                             @if ($item->type == App\MediaTypeEnum::IMAGE)
                             <img src="{{ asset('storage/' . $item->url) }}" class="img-fluid rounded"
@@ -45,8 +46,11 @@
                             style="width: 100px; height: 100px; cursor: pointer;">
                             <span class="fs-3 text-muted">+</span>
                         </div>
-
                     </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-end">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="{{ route('projects.show', $project->slug) }}" class="btn btn-primary">Save</a>
                 </div>
             </div>
 
@@ -55,7 +59,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title">Add New Media</h5>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body pb-0">
                     <form id="new-media-form" data-action="{{ route('media.store') }}">
                         <div class="row">
                             <div class="col-6">
@@ -75,7 +79,7 @@
                                 <input type="text" name="description" id="new-media-description" class="form-control">
                             </div>
                         </div>
-                        <div class="modal-footer mt-3 d-flex justify-content-end">
+                        <div class="mt-4 d-flex justify-content-end">
                             <button type="button" class="btn btn-secondary me-2"
                                 id="cancel-media-add-btn">Cancel</button>
                             <button type="submit" class="btn btn-primary">Save</button>
@@ -90,11 +94,12 @@
                     <h5 class="modal-title">Delete Media</h5>
                 </div>
                 <div class="modal-body">
-                    <p>Are you sure you want to delete this media?</p>
+                    <p>Are you sure you want to <strong>permanently delete</strong> this media?</p>
                 </div>
-                <div class="modal-footer mt-3 d-flex justify-content-end">
-                    <button type="button" class="btn btn-secondary me-2" id="cancel-media-delete-btn">Cancel</button>
-                    <button type="button" class="btn btn-danger" id="confirm-media-delete-btn">Delete</button>
+                <div class="modal-footer d-flex justify-content-end">
+                    <button type="button" class="btn btn-secondary me-2 mt-2 mb-0"
+                        id="cancel-media-delete-btn">Cancel</button>
+                    <button type="button" class="btn btn-danger mt-2 mb-0" id="confirm-media-delete-btn">Delete</button>
                 </div>
             </div>
 

@@ -18,7 +18,7 @@
         <span class="badge text-bg-primary mb-4">{{ $project->category['name'] }} - {{ $project->type['name'] }}</span>
         <!-- Project Cover Image -->
         @if ($project->cover_image)
-        <img src="{{ asset('storage/' . $project->cover_image) }}" alt="{{ $project->title }}" class="mb-5 w-75">
+        <img src="{{ asset('storage/' . $project->cover_image) }}" alt="{{ $project->title }}" class="mb-5" style="max-height: 500px">
         @endif
         <!-- Project Details -->
         <div class="d-flex justify-content-between w-100">
@@ -71,12 +71,13 @@
             </button>
             <!-- Media Carousel -->
             @if (count($project->media) > 0)
-            <div id="carouselMedia" class="carousel slide w-75 mb-4">
-                <div class="carousel-inner">
+            <div id="carouselMedia" class="carousel slide mb-4" style="height: 600px; width: 600px">
+                <div class="carousel-inner w-100 h-100">
                     @foreach ($project->media as $media)
-                    <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                        <img src="{{ asset('storage/' . $media->url) }}" class="d-block w-100"
-                            alt="{{ $media->description ?? $project->title }}">
+                    <div class="carousel-item {{ $loop->first ? 'active' : '' }} w-100 h-100">
+                        <img src="{{ asset('storage/' . $media->url) }}" class="d-block w-100 h-100"
+                            alt="{{ $media->description ?? $project->title }}"
+                            style="object-fit: cover">
                     </div>
                     @endforeach
                 </div>

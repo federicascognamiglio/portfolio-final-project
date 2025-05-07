@@ -72,7 +72,7 @@
                     </select>
                 </div>
                 <!-- Tags -->
-                <div class="col-6 mb-3">
+                <div class="col-6 mt-4 mb-5">
                     <div class="d-flex align-items-center mb-2">
                         <p class="form-labe mb-0 me-2">Tags:</p>
                         <div id="selected-tags"></div>
@@ -84,7 +84,7 @@
                     </button>
                 </div>
                 <!-- Tools -->
-                <div class="col-6 mb-3">
+                <div class="col-6 mt-4 mb-5">
                     <div class="d-flex align-items-center mb-2">
                         <p class="form-labe mb-0 me-2">Tools:</p>
                         <div id="selected-tools"></div>
@@ -101,6 +101,10 @@
                     <input type="file" class="form-control" id="cover_image" name="cover_image">
                 </div>
             </div>
+            <!-- Hidden inputs for selected tags and tools -->
+            <div id="hidden-tags-wrapper"></div>
+            <div id="hidden-tools-wrapper"></div>
+            <!-- Submit -->
             <button type="submit" class="btn btn-primary mt-3">Create Project</button>
         </form>
     </div>

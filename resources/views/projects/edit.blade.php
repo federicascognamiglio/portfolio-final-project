@@ -81,7 +81,7 @@
                     </select>
                 </div>
                 <!-- Tags -->
-                <div class="col-6 mb-3">
+                <div class="col-6 mt-4 mb-5">
                     <div class="d-flex align-items-center mb-2">
                         <p class="form-labe mb-0 me-2">Tags:</p>
                         <div id="hidden-tags-wrapper"></div>
@@ -100,7 +100,7 @@
                     </button>
                 </div>
                 <!-- Tools -->
-                <div class="col-6 mb-3">
+                <div class="col-6 mt-4 mb-5">
                     <div class="d-flex align-items-center mb-2">
                         <p class="form-labe mb-0 me-2">Tools:</p>
                         <div id="hidden-tools-wrapper"></div>

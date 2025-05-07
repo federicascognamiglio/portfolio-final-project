@@ -50,8 +50,8 @@
                     <button type="button" id="add-tool-btn" class="btn btn-sm btn-primary mt-2">Add Tool</button>
                     <div class="modal-footer mt-3">
                         <div class="d-flex justify-content-end">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                                aria-label="Chiudi">Close</button>
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                                aria-label="Save">Save</button>
                         </div>
                     </div>
                 </div>
