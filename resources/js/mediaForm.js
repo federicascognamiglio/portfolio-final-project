@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
             deleteBtn?.classList.add('d-none');
         });
     
-        // Se vuoi anche abilitare la modalità delete da subito
+        // Enable delete feature at start
         deleteBtn?.addEventListener('click', () => {
             const mediaId = deleteBtn.dataset.id;
             document.getElementById('media-delete-mode').dataset.mediaId = mediaId;

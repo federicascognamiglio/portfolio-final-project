@@ -33,4 +33,5 @@ Route::resource('/tools', ToolController::class)->middleware(['auth', 'verified'
 // Media Routes
 Route::resource('/media', MediaController::class)->middleware(['auth', 'verified']);
 
+
 require __DIR__.'/auth.php';
