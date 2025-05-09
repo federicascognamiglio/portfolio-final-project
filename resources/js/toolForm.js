@@ -1,4 +1,32 @@
+// Gets selected tools and fill hidden inputs
+function initializeSelectedTools() {
+    const checkedTools = document.querySelectorAll('input[name="tools[]"]:checked');
+    const selectedToolsEl = document.getElementById('selected-tools');
+    const hiddenToolsWrapper = document.getElementById('hidden-tools-wrapper');
+    
+    selectedToolsEl.innerHTML = '';
+    hiddenToolsWrapper.innerHTML = '';
+    
+    checkedTools.forEach(tool => {
+        const toolId = tool.getAttribute('id');
+        const label = document.querySelector(`label[for="${toolId}"]`);
+        const toolName = label ? label.textContent.trim() : 'undefined';
+
+        // Badge
+        selectedToolsEl.innerHTML += `<span class="badge bg-secondary me-1">${toolName}</span>`;
+
+        // Hidden input
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'tools[]';
+        input.value = tool.value;
+        hiddenToolsWrapper.appendChild(input);
+    });
+}
+
 document.addEventListener('DOMContentLoaded', function () {
+    // Initialise selected tools hidden inputs
+    initializeSelectedTools()
 
     // Elements
     const addToolBtn = document.getElementById('add-tool-btn');

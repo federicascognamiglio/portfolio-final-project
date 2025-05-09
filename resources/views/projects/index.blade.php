@@ -3,6 +3,7 @@
 @section ('pageTitle', 'My Projects')
 
 @section('content')
+@include('partials.alerts')
 <div class="container mt-5">
     <!-- Title -->
     <h1 class="mt-5 text-center text-uppercase">My Projects</h1>
@@ -59,7 +60,7 @@
                 <td>
                     <a href="{{ route('projects.show', $project->slug) }}" class="btn btn-sm btn-outline-primary me-2">View</a>
                     <a href="{{ route('projects.edit', $project->slug) }}" class="btn btn-sm btn-outline-warning me-2">Edit</a>
-                    <form action="{{ route('projects.destroy', $project->slug) }}" method="POST" class="d-inline">
+                    <form action="{{ route('projects.destroy', $project) }}" method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>

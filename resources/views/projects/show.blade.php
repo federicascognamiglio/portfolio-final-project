@@ -3,6 +3,7 @@
 @section ('pageTitle', $project->title)
 
 @section ('content')
+@include('partials.alerts')
 <div class="container mt-5 mb-5">
     <!-- BreadCrumb -->
     <nav aria-label="breadcrumb">

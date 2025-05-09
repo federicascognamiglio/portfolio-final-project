@@ -1,4 +1,32 @@
+// Gets selected tags and fill hidden inputs
+function initializeSelectedTags() {
+    const checkedTags = document.querySelectorAll('input[name="tags[]"]:checked');
+    const selectedTagsEl = document.getElementById('selected-tags');
+    const hiddenTagsWrapper = document.getElementById('hidden-tags-wrapper');
+    
+    selectedTagsEl.innerHTML = '';
+    hiddenTagsWrapper.innerHTML = '';
+    
+    checkedTags.forEach(tag => {
+        const tagId = tag.getAttribute('id');
+        const label = document.querySelector(`label[for="${tagId}"]`);
+        const tagName = label ? label.textContent.trim() : 'undefined';
+
+        // Badge
+        selectedTagsEl.innerHTML += `<span class="badge bg-secondary me-1">${tagName}</span>`;
+
+        // Hidden input
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'tags[]';
+        input.value = tag.value;
+        hiddenTagsWrapper.appendChild(input);
+    });
+}
+
 document.addEventListener('DOMContentLoaded', function () {
+    // Initialise selected tags hidden inputs
+    initializeSelectedTags();
 
     // Elements
     const addTagBtn = document.getElementById('add-tag-btn');

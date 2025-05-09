@@ -49,55 +49,62 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        // Validate the request data
-        $validatedData = $request->validate([
-            'title' => 'required|string|max:255',
-            'subtitle' => 'nullable|string|max:255',
-            'client' => 'nullable|string|max:255',
-            'description' => 'nullable|string',
-            'start_date' => 'nullable|date',
-            'end_date' => 'nullable|date',
-            'status' => 'required|in:draft,published,archived',
-            'category_id' => 'nullable|exists:categories,id',
-            'type_id' => 'nullable|exists:types,id',
-            'tags' => 'nullable|array',
-            'tools' => 'nullable|array',
-            'cover_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
-
-        // Handle the cover image upload
-        if ($request->hasFile('cover_image')) {
-            $imgUrl = Storage::putFile('projects', $validatedData['cover_image']);
+        try {
+            // Validate the request data
+            $validatedData = $request->validate([
+                'title' => 'required|string|max:255',
+                'subtitle' => 'nullable|string|max:255',
+                'client' => 'nullable|string|max:255',
+                'description' => 'nullable|string',
+                'start_date' => 'nullable|date',
+                'end_date' => 'nullable|date',
+                'status' => 'required|in:draft,published,archived',
+                'category_id' => 'nullable|exists:categories,id',
+                'type_id' => 'nullable|exists:types,id',
+                'tags' => 'nullable|array',
+                'tools' => 'nullable|array',
+                'cover_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            ]);
+    
+            // Handle the cover image upload
+            if ($request->hasFile('cover_image')) {
+                $imgUrl = Storage::putFile('projects', $validatedData['cover_image']);
+            }
+    
+            // Slug generation
+            $slug = Project::generateUniqueSlug($validatedData['title']);
+    
+            // Create a new project
+            $project = Project::create([
+                'title' => $validatedData['title'],
+                'slug' => $slug,
+                'subtitle' => $validatedData['subtitle'],
+                'cover_image' => $imgUrl ?? null,
+                'client' => $validatedData['client'],
+                'description' => $validatedData['description'],
+                'category_id' => $validatedData['category_id'],
+                'type_id' => $validatedData['type_id'],
+                'status' => $validatedData['status'],
+                'start_date' => $validatedData['start_date'],
+                'end_date' => $validatedData['end_date'],
+            ]);
+    
+            // Attach tags and tools
+            if (isset($validatedData['tags'])) {
+                $project->tags()->attach($validatedData['tags']);
+            }
+    
+            if (isset($validatedData['tools'])) {
+                $project->tools()->attach($validatedData['tools']);
+            }
+    
+            return redirect()->route('projects.index')->with('success', 'Progetto creato con successo.');
+        } catch (\Exception $e) {
+            // Riturn to form with error message
+            return redirect()->back()
+                ->withInput() // keep inputs
+                ->with('error', 'Errore while creating project. Retry');
         }
-
-        // Slug generation
-        $slug = Project::generateUniqueSlug($validatedData['title']);
-
-        // Create a new project
-        $project = Project::create([
-            'title' => $validatedData['title'],
-            'slug' => $slug,
-            'subtitle' => $validatedData['subtitle'],
-            'cover_image' => $imgUrl ?? null,
-            'client' => $validatedData['client'],
-            'description' => $validatedData['description'],
-            'category_id' => $validatedData['category_id'],
-            'type_id' => $validatedData['type_id'],
-            'status' => $validatedData['status'],
-            'start_date' => $validatedData['start_date'],
-            'end_date' => $validatedData['end_date'],
-        ]);
-
-        // Attach tags and tools to the project
-        if (isset($validatedData['tags'])) {
-            $project->tags()->attach($validatedData['tags']);
-        }
-
-        if (isset($validatedData['tools'])) {
-            $project->tools()->attach($validatedData['tools']);
-        }
-
-        return redirect()->route('projects.index')->with('success', 'Project created successfully.');
     }
 
     /**

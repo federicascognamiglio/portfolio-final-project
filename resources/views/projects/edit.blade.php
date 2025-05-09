@@ -4,7 +4,8 @@
 
 @section('content')
 <div class="container my-5">
-    <h1 class="my-5 text-uppercase text-center">Edit: {{ $project->title }}</h1>
+    <h1 class="mt-5 text-uppercase text-center">Edit: {{ $project->title }}</h1>
+    <p class="text-muted text-center mb-5">Fields marked with * are mandatory</p>
 
     <!-- Form -->
     <div class="form">
@@ -15,7 +16,7 @@
             <div class="row">
                 <!-- Title -->
                 <div class="col-sm-6 col-md-4 mb-3">
-                    <label for="title" class="form-label">Title</label>
+                    <label for="title" class="form-label">Title*</label>
                     <input type="text" class="form-control" id="title" name="title" value="{{ $project->title }}"
                         required>
                 </div>
@@ -50,7 +51,7 @@
                 </div>
                 <!-- Status -->
                 <div class="col-sm-6 col-md-4 mb-3">
-                    <label for="status" class="form-label">Status</label>
+                    <label for="status" class="form-label">Status*</label>
                     <select name="status" class="form-select" id="status">
                         @foreach (App\ProjectStatus::cases() as $status)
                         <option value="{{ $status->value }}"
@@ -130,6 +131,10 @@
                     </div>
                 </div>
             </div>
+            <!-- Hidden inputs for selected tags and tools -->
+            <div id="hidden-tags-wrapper"></div>
+            <div id="hidden-tools-wrapper"></div>
+            <!-- Submit -->
             <button type="submit" class="btn btn-primary mt-3">Save Changes</button>
         </form>
     </div>

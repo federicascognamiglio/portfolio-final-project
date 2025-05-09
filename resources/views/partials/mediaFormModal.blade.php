@@ -63,7 +63,7 @@
                     <form id="new-media-form" data-action="{{ route('media.store') }}">
                         <div class="row">
                             <div class="col-6">
-                                <label for="new-media-type" class="form-label">Media Type</label>
+                                <label for="new-media-type" class="form-label">Media Type*</label>
                                 <select name="type" id="new-media-type" class="form-select mb-2">
                                     @foreach (App\MediaTypeEnum::cases() as $type)
                                     <option value="{{ $type->name }}">{{ $type->label() }}</option>
@@ -71,7 +71,7 @@
                                 </select>
                             </div>
                             <div class="col-6">
-                                <label for="new-media-url" class="form-label">Upload File</label>
+                                <label for="new-media-url" class="form-label">Upload File*</label>
                                 <input type="file" name="url" id="new-media-url" class="form-control mb-2" required>
                             </div>
                             <div class="col-12">

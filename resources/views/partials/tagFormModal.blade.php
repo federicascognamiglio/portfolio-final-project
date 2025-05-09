@@ -34,7 +34,7 @@
                     <h5>Add new tag</h5>
                     <div class="row">
                         <div class="col-6">
-                            <label for="new-tag-name" class="form-label">Tag name</label>
+                            <label for="new-tag-name" class="form-label">Tag name*</label>
                             <input type="text" name="name" id="new-tag-name" class="form-control mb-2" required>
                         </div>
                         <div class="col-3">
@@ -62,7 +62,7 @@
                         <input type="hidden" id="edit-tag-id" name="id">
                         <div class="row mb-3">
                             <div class="col-6">
-                                <label for="edit-tag-name" class="form-label">Tag Name</label>
+                                <label for="edit-tag-name" class="form-label">Tag Name*</label>
                                 <input type="text" class="form-control" id="edit-tag-name" name="name" required>
                             </div>
                             <div class="col-6">

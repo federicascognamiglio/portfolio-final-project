@@ -35,7 +35,7 @@
                     <h5>Add new tool</h5>
                     <div class="row">
                         <div class="col-4">
-                            <label for="new-tool-name" class="form-label">Tool name</label>
+                            <label for="new-tool-name" class="form-label">Tool name*</label>
                             <input type="text" name="name" id="new-tool-name" class="form-control mb-2" required>
                         </div>
                         <div class="col-4">
@@ -67,7 +67,7 @@
                         <input type="hidden" id="edit-tool-id" name="id">
                         <div class="row mb-3">
                             <div class="col-4">
-                                <label for="edit-tool-name" class="form-label">Tool Name</label>
+                                <label for="edit-tool-name" class="form-label">Tool Name*</label>
                                 <input type="text" class="form-control" id="edit-tool-name" name="name" required>
                             </div>
                             <div class="col-4">
